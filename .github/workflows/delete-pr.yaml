@@ -12,8 +12,8 @@ jobs:
         functions: [example, example2]
     steps:
       - name: Delete PR function
-        uses: andeplane/deploy-function-python@master
-        env: 
+        uses: ./
+        env:
           DELETE_PR_FUNCTION: true
         with:
           cdf_project: datastudio
@@ -21,4 +21,3 @@ jobs:
           cdf_deployment_credentials: ${{ secrets.COGNITE_API_KEY }}
           cdf_function_credentials: ${{ secrets.COGNITE_API_KEY }}
           function_path: ${{ matrix.functions }}
-          
