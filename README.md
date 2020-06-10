@@ -4,6 +4,8 @@
 
 This action deploys a Python function to Cognite Functions.
 
+BUMP
+
 ## Inputs
 
 ### `function_path`
