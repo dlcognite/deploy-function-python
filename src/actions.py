@@ -24,10 +24,11 @@ def zip_and_upload_folder(functions_api, folder, file_name) -> int:
         with TemporaryDirectory() as tmpdir:
             zip_path = os.path.join(tmpdir, "function.zip")
             zf = ZipFile(zip_path, "w")
-            for root, dirs, files in os.walk("."):
+            for root, dirs, files in os.walk(".", followlinks=True):
                 zf.write(root)
                 for filename in files:
-                    zf.write(os.path.join(root, filename))
+                    if os.path.isfile(os.path.join(root, filename)):
+                        zf.write(os.path.join(root, filename))
             zf.close()
 
             file = functions_api._cognite_client.files.upload(
